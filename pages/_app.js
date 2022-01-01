@@ -1,18 +1,21 @@
+import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 
 const Layout = ({ children }) => {
   return (
-    <div className="w-full min-w-screen min-h-screen p-8 bg-gray-800 text-white">
+    <div className="w-full min-w-screen min-h-screen bg-slate-900 text-white relative">
       {children}
     </div>
   )
 }
 
-const SpotList = ({ Component, pageProps }) => {
+const SpotList = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <SessionProvider session={session}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SessionProvider>
   )
 }
 
