@@ -3,7 +3,8 @@ import Head from 'next/head'
 
 const Home = () => {
   const { data: session, status } = useSession()
-  console.log({ session, status })
+  if (status === 'loading') return <>Loading...</>
+  if (status !== 'authenticated') return <>Not authorised...</>
   return (
     <>
       <Head>
@@ -15,7 +16,7 @@ const Home = () => {
         <div>
           <h1 className="text-6xl font-bold text-green-500">SpotList</h1>
           <h2 className="mt-3 text-lg font-light text-white">
-            Hello {session.user.name}
+            Hello {session?.user.name}
           </h2>
         </div>
         <div className="rounded-2xl border border-white p-8 h-48">
